@@ -19,8 +19,9 @@ public class jeuServer extends jeu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TextView textType = findViewById(R.id.textType);
+        /*
         textType.setText(textType.getText() + " Server");
+         */
 
         this.serverClass = new ServerClass(this);
         this.serverClass.start();
@@ -40,7 +41,19 @@ public class jeuServer extends jeu {
     public void receive(String texte) {
         String textes[] = texte.split(":");
 
-        if (textes.length == 2) {
+        if (textes.length == 1) {
+            switch (texte) {
+                case "quitter":
+                    adversaireQuit();
+                    break;
+
+                case "recommencer":
+                    this.restartAdversaire = true;
+                    if (restart == null) this.adversaireRecommence();
+                    else restart();
+                    break;
+            }
+        } else if (textes.length == 2) {
             String categorie = textes[0];
             String valeur = textes[1];
 
@@ -55,14 +68,6 @@ public class jeuServer extends jeu {
                         finManche();
                     }
                     break;
-
-                case "recommencer":
-                    this.restartAdversaire = Boolean.valueOf(valeur);
-                    if(this.restartAdversaire == true){
-                        if(restart == null) this.adversaireRecommence();
-                        else restart();
-                    }
-                    else this.adversaireQuit();
             }
         }
     }
@@ -124,7 +129,7 @@ public class jeuServer extends jeu {
         }, 4000);
     }
 
-    public void restart(){
+    public void restart() {
         send("restart");
         super.restart();
     }
@@ -136,8 +141,10 @@ public class jeuServer extends jeu {
     }
 
     @Override
-    public void sendRecommencer(String restart){
-        if(restartAdversaire == null) send(restart);
-        else this.restart();
+    public void sendRecommencer(String restart) {
+        if (restartAdversaire == null) {
+            send(restart);
+            this.attendreRecommencerAdversaire();
+        } else this.restart();
     }
 }

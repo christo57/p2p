@@ -18,12 +18,14 @@ public class jeuClient extends jeu {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         //init
         this.nomServeur = getIntent().getExtras().getString("nom");
         this.adresseServeur = (InetAddress) getIntent().getExtras().get("adresse");
 
-        TextView textType = findViewById(R.id.textType);
+        /*
         textType.setText(textType.getText() + " Client : connected to " + this.nomServeur + " : " + this.adresseServeur.getHostAddress());
+         */
 
         this.clientClass = new ClientClass(this, this.adresseServeur);
         this.clientClass.start();
@@ -61,6 +63,15 @@ public class jeuClient extends jeu {
                 case "restart":
                     restart();
                     break;
+
+                case "quitter":
+                    adversaireQuit();
+                    break;
+
+                case "recommencer":
+                    this.restartAdversaire = true;
+                    this.adversaireRecommence();
+                    break;
             }
 
         }
@@ -83,11 +94,6 @@ public class jeuClient extends jeu {
                     int res = Integer.parseInt(valeur);
                     this.afficherResultat(res);
                     break;
-
-                case "recommencer":
-                    this.restartAdversaire = Boolean.valueOf(valeur);
-                    if(this.restartAdversaire == true) this.adversaireRecommence();
-                    else this.adversaireQuit();
             }
         }
     }
@@ -109,5 +115,8 @@ public class jeuClient extends jeu {
     @Override
     public void sendRecommencer(String restart){
         send(restart);
+        if(restartAdversaire == null) {
+            this.attendreRecommencerAdversaire();
+        }
     }
 }

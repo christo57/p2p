@@ -18,14 +18,18 @@ import com.example.p2p_client.R;
 
 public abstract class jeu extends Activity {
 
-    public static final int SCOREPOURGAGNER = 1;
+    public static final int SCOREPOURGAGNER = 3;
 
     public static final int DECONNEXION = 1;
 
+    /*
     //pour developper
     String texteInitial = "texte : ";
     TextView texte;
     TextView texteToSend;
+    Button btnSend;
+    TextView textType;
+    */
 
     TextView textScore;
 
@@ -70,15 +74,14 @@ public abstract class jeu extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.jeu);
+        setContentView(R.layout.jeu_final);
 
+        /*
+        textType = findViewById(R.id.textType);
         texte = findViewById(R.id.textMessage);
         texteToSend = findViewById(R.id.texteToSend);
 
-        textScore = findViewById(R.id.textGeneral);
-        textScore.setText("Score : le premier a " + SCOREPOURGAGNER + " gagne");
-
-        Button btnSend = findViewById(R.id.buttonSend);
+        btnSend = findViewById(R.id.buttonSend);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +89,10 @@ public abstract class jeu extends Activity {
                 send("autre:" + msg);
             }
         });
+        */
+
+        textScore = findViewById(R.id.textGeneral);
+        textScore.setText("Score : le premier a " + SCOREPOURGAGNER + " gagne");
 
         boutonPierre = findViewById(R.id.buttonPierre);
         boutonPierre.setBackgroundColor(Color.WHITE);
@@ -135,7 +142,7 @@ public abstract class jeu extends Activity {
 
     public void receive(String texte) {
         Log.i(MainActivity.TAG, texte);
-        this.texte.setText(texteInitial + texte);
+        //this.texte.setText(texteInitial + texte);
     }
 
     public void afficherAdversaireJouer() {
@@ -225,7 +232,7 @@ public abstract class jeu extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 restart = true;
-                sendRecommencer("recommencer:true");
+                sendRecommencer("recommencer");
             }
         });
 
@@ -233,12 +240,13 @@ public abstract class jeu extends Activity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         restart = false;
-                        send("recommencer:false");
+                        send("quitter");
                         finActivite();
                     }
                 });
 
         this.showed = alert.create();
+        this.showed.setCanceledOnTouchOutside(false);
         showed.show();
     }
 
@@ -247,6 +255,7 @@ public abstract class jeu extends Activity {
 
         alert.setMessage("Voulez-vous recommencer ? \n Votre adversaire veut recommencer");
         this.showed = alert.create();
+        this.showed.setCanceledOnTouchOutside(false);
         showed.show();
     }
 
@@ -265,15 +274,35 @@ public abstract class jeu extends Activity {
         });
 
         this.showed = alert.create();
+        this.showed.setCanceledOnTouchOutside(false);
+        showed.show();
+    }
+
+    public void attendreRecommencerAdversaire(){
+        this.alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("En attente de votre adversaire ...");
+
+        alert.setPositiveButton("quitter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finActivite();
+            }
+        });
+
+        this.showed = alert.create();
+        this.showed.setCanceledOnTouchOutside(false);
         showed.show();
     }
 
     public void finActivite(){
+        send("quitter");
         setResult(DECONNEXION);
         super.finish();
     }
 
     public void restart(){
+        showed.dismiss();
         //redemmar le jeu
         Log.i(Activity_cli_ser.TAG, "restart game");
         initialisation();

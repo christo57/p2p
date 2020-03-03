@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="18dp" />
+
+    <TextView
+        android:id="@+id/textGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Score : le premier a 5 gagne" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textVous"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Vous" />
+
+            <Button
+                android:id="@+id/buttonPierre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pierre" />
+
+            <Button
+                android:id="@+id/buttonFeuille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feuille" />
+
+            <Button
+                android:id="@+id/buttonCiseaux"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ciseaux" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textScoreVous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="0" />
+
+        <TextView
+            android:id="@+id/textSeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="-" />
+
+        <TextView
+            android:id="@+id/textScoreAdversaire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="0" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textVotreAdversaire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Votre Adversaire" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="49dp" />
+
+            <Button
+                android:id="@+id/buttonChoixAdversaire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="Choix" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
