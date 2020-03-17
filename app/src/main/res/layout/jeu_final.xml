@@ -5,7 +5,7 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="18dp" />
+        android:layout_height="15dp" />
 
     <TextView
         android:id="@+id/textGeneral"
@@ -16,95 +16,124 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="15dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="536dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textVous"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Vous" />
-
-            <Button
-                android:id="@+id/buttonPierre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pierre" />
-
-            <Button
-                android:id="@+id/buttonFeuille"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Feuille" />
-
-            <Button
-                android:id="@+id/buttonCiseaux"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ciseaux" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textScoreVous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="0" />
-
-        <TextView
-            android:id="@+id/textSeparator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="-" />
-
-        <TextView
-            android:id="@+id/textScoreAdversaire"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="0" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_horizontal|top"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textVotreAdversaire"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Votre Adversaire" />
+                android:gravity="center" />
 
             <Space
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="49dp" />
 
             <Button
                 android:id="@+id/buttonChoixAdversaire"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="top|center_vertical"
+                android:background="@mipmap/ic_question"
+                android:backgroundTintMode="multiply"
                 android:enabled="false"
-                android:text="Choix" />
+                android:gravity="top" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textScoreVous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/textSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="-"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/textScoreAdversaire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="0"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="36sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textVous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/buttonPierre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_rock"
+            android:backgroundTintMode="multiply"
+            android:gravity="center" />
+
+        <Button
+            android:id="@+id/buttonFeuille"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_paper"
+            android:backgroundTintMode="multiply" />
+
+        <Button
+            android:id="@+id/buttonCiseaux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_scissor"
+            android:backgroundTintMode="multiply"
+            android:gravity="center" />
     </LinearLayout>
 
 </LinearLayout>

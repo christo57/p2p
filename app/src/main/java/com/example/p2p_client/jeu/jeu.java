@@ -3,13 +3,24 @@ package com.example.p2p_client.jeu;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.BlendMode;
+import android.graphics.BlendModeColorFilter;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.p2p_client.Activity_cli_ser;
 import com.example.p2p_client.MainActivity;
@@ -56,7 +67,15 @@ public abstract class jeu extends Activity {
     protected AlertDialog.Builder alert;
     protected AlertDialog showed;
 
+    //colors
+    int redwrong;
+    int greenright;
+    int greyselected;
+
+
     public void initialisation(){
+
+
         choix = -1;
         choixAdversaire = -1;
 
@@ -75,6 +94,9 @@ public abstract class jeu extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jeu_final);
+        int redwrong = ResourcesCompat.getColor(getResources(), R.color.redwrong, null);
+        int greenright = ResourcesCompat.getColor(getResources(), R.color.greenright, null);
+        int greyselected = ResourcesCompat.getColor(getResources(), R.color.greyselected, null);
 
         /*
         textType = findViewById(R.id.textType);
@@ -95,7 +117,8 @@ public abstract class jeu extends Activity {
         textScore.setText("Score : le premier a " + SCOREPOURGAGNER + " gagne");
 
         boutonPierre = findViewById(R.id.buttonPierre);
-        boutonPierre.setBackgroundColor(Color.WHITE);
+        //  boutonPierre.setBackgroundColor(Color.WHITE);
+
         boutonPierre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +128,7 @@ public abstract class jeu extends Activity {
         });
 
         boutonFeuille = findViewById(R.id.buttonFeuille);
-        boutonFeuille.setBackgroundColor(Color.WHITE);
+        //boutonFeuille.setBackgroundColor(Color.WHITE);
         boutonFeuille.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +138,7 @@ public abstract class jeu extends Activity {
         });
 
         boutonCiseaux = findViewById(R.id.buttonCiseaux);
-        boutonCiseaux.setBackgroundColor(Color.WHITE);
+        //boutonCiseaux.setBackgroundColor(Color.WHITE);
         boutonCiseaux.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,19 +148,19 @@ public abstract class jeu extends Activity {
         });
 
         this.boutonChoixAdversaire = findViewById(R.id.buttonChoixAdversaire);
-        boutonChoixAdversaire.setBackgroundColor(Color.WHITE);
         this.scoreVous = findViewById(R.id.textScoreVous);
         this.scoreAdversaire = findViewById(R.id.textScoreAdversaire);
 
         initialisation();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     public void jouer(int choix) {
         this.choix = choix;
-        boutonChoix.setBackgroundColor(Color.YELLOW);
         boutonPierre.setEnabled(false);
         boutonFeuille.setEnabled(false);
         boutonCiseaux.setEnabled(false);
+        //boutonCiseaux.getBackground().setColorFilter(greenright, PorterDuff.Mode.SRC_OVER);
     }
 
     public void receive(String texte) {
@@ -145,9 +168,9 @@ public abstract class jeu extends Activity {
         //this.texte.setText(texteInitial + texte);
     }
 
+
     public void afficherAdversaireJouer() {
-        boutonChoixAdversaire.setBackgroundColor(Color.CYAN);
-        boutonChoixAdversaire.setText("CHOIX FAIT");
+        //boutonChoixAdversaire.setBackgroundTintList(this.getResources().getColorStateList(R.color.greenquestion,null));
     }
 
     public void afficherResultat(int res) {
@@ -157,37 +180,46 @@ public abstract class jeu extends Activity {
         switch (this.choixAdversaire) {
             case 0:
                 choixAdversaire = "PIERRE";
+                boutonChoixAdversaire.setBackground(ContextCompat.getDrawable(this, R.mipmap.ic_rock));
                 break;
             case 1:
                 choixAdversaire = "FEUILLE";
+                boutonChoixAdversaire.setBackground(ContextCompat.getDrawable(this, R.mipmap.ic_paper));
                 break;
             case 2:
                 choixAdversaire = "CISEAUX";
+                boutonChoixAdversaire.setBackground(ContextCompat.getDrawable(this, R.mipmap.ic_scissor));
+
                 break;
         }
 
-        boutonChoixAdversaire.setText(choixAdversaire);
 
         switch (res) {
 
             //egalite
             case 0:
-                boutonChoixAdversaire.setBackgroundColor(Color.GRAY);
-                boutonChoix.setBackgroundColor(Color.GRAY);
+                //boutonChoixAdversaire.setBackgroundColor(Color.GRAY);
+                //boutonChoix.setBackgroundColor(Color.GRAY);
                 break;
 
             //gagner
             case 1:
-                boutonChoixAdversaire.setBackgroundColor(Color.RED);
-                boutonChoix.setBackgroundColor(Color.GREEN);
+
+                //boutonChoixAdversaire.setBackgroundTintList(this.getResources().getColorStateList(R.color.redwrong));
+                //boutonChoix.setBackgroundTintList(this.getResources().getColorStateList(R.color.greenright));
+
+                //boutonChoixAdversaire.setBackgroundColor(Color.RED);
+                //boutonChoix.setBackgroundColor(Color.GREEN);
 
                 this.scoreVous.setText(String.valueOf(getScore() + 1));
                 break;
 
             //perdu
             case -1:
-                boutonChoixAdversaire.setBackgroundColor(Color.GREEN);
-                boutonChoix.setBackgroundColor(Color.RED);
+                //boutonChoix.setBackgroundTintList(this.getResources().getColorStateList(R.color.redwrong));
+                //boutonChoixAdversaire.setBackgroundTintList(this.getResources().getColorStateList(R.color.greenright));
+                //boutonChoixAdversaire.setBackgroundColor(Color.GREEN);
+                //boutonChoix.setBackgroundColor(Color.RED);
 
                 this.scoreAdversaire.setText(String.valueOf(getScoreAdversaire() + 1));
                 break;
@@ -199,10 +231,10 @@ public abstract class jeu extends Activity {
         this.choix = -1;
         this.choixAdversaire = -1;
 
-        this.boutonChoixAdversaire.setText("CHOIX");
+        boutonChoixAdversaire.setBackgroundResource(R.mipmap.ic_question);
 
-        this.boutonChoixAdversaire.setBackgroundColor(Color.WHITE);
-        this.boutonChoix.setBackgroundColor(Color.WHITE);
+        //boutonChoixAdversaire.setBackgroundTintList(this.getResources().getColorStateList(R.color.notint));
+        // this.boutonChoix.setBackgroundTintList(this.getResources().getColorStateList(R.color.notint));
 
         boutonPierre.setEnabled(true);
         boutonFeuille.setEnabled(true);

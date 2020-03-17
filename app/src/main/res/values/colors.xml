@@ -4,4 +4,14 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="back">#D8000A</color>
+    <color name="greenquestion">#0FCCFFCC</color>
+    <color name="greyselected">#0FDDDDDD</color>
+    <color name="blacktest">#0F000000</color>
+    <color name="redwrong">#0FFFFFFF</color>
+    <color name="greenright">#0F00FF00</color>
+    <color name="notint">#0FFFFFFF</color>
+
+
+
+
 </resources>
