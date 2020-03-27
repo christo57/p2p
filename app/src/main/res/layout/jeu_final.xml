@@ -118,6 +118,7 @@
             android:layout_height="wrap_content"
             android:background="@mipmap/ic_rock"
             android:backgroundTintMode="multiply"
+            android:strk
             android:gravity="center" />
 
         <Button
